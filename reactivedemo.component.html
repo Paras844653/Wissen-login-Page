@@ -1,0 +1,33 @@
+<div class="container-fluid">
+   <h1> {{title | sentence}} </h1>
+    <h2> rEGisTER fORm</h2>
+   <form [formGroup]="frmRegister" (submit)="SubmitForm(frmRegister.value)" >
+        <dl>
+         <dt>User Name</dt>
+         <dd><input formControlName="Uname" type="text"></dd>
+         <dd class="text-danger" *ngIf="Uname.touched && Uname.invalid">
+            <span *ngIf="Uname.errors?.['required']"> Name required </span>
+            <span *ngIf="Uname.errors?.['minlength']"> Name too short </span>
+
+         </dd>
+
+         <dt> Mobile number</dt>
+         <dd><input formControlName="Mobile" type="text"></dd>
+         <dd class="text-danger" *ngIf="Mobile.touched && Mobile.invalid">
+             <span *ngIf="Mobile.errors?.['required']">Number Required</span>
+             <span *ngIf="Mobile.errors?.['pattern'] "> Correct Formate </span>
+         </dd>
+
+         <dt> Upload Photos <button type="button" class="btn btn-link" (click)="AddMore()" > More </button></dt>
+         <dd *ngFor="let item of Photos.controls; let i=index">
+            <input type="file" formControlName="i"><button (click)="Removedata(i)" class="btn btn-link">Remove</button>
+         </dd>
+        
+    
+       </dl>
+   <button>Register</button>
+</form>
+
+   <h1 class="mt-5"> Details </h1>
+   User Name:  {{frmRegister.value.Uname}}
+</div>
